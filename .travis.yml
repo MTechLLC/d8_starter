@@ -18,6 +18,8 @@ mysql:
 cache:
   directories:
     - ${HOME}/.composer/cache
+    # This is where vendor/ backups will be stored.
+    - ${HOME}/vendor-cache/
 git:
   depth: 3
 before_install: ${TRAVIS_BUILD_DIR}/build/before_install.sh

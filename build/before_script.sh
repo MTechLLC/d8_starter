@@ -7,7 +7,8 @@ sudo apt-get install apache2 libapache2-mod-fastcgi -yq --no-install-suggests --
 sudo a2enmod rewrite actions fastcgi alias
 cp ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.conf.default ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.conf
 # Work around travis issue #3385
-if [ -e ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.d/www.conf.default ] ; then
+if [ -e ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.d/www.conf.default ]
+then
   cp ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.d/www.conf.default ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.d/www.conf
 fi
 echo "cgi.fix_pathinfo = 1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
