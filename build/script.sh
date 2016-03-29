@@ -13,4 +13,5 @@ java -jar selenium-server-standalone-${SELENIUM_MAJ_VERSION}.${SELENIUM_MIN_VERS
 sleep 5
 # Install & run Behat tests.
 cd ${TRAVIS_BUILD_DIR}/test
+${TRAVIS_BUILD_DIR}/vendor/bin/behat --version
 ${TRAVIS_BUILD_DIR}/vendor/bin/behat
