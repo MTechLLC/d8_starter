@@ -21,6 +21,7 @@ echo "extension=apc.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm
 echo "apc.shm_size=256M" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.ini
 # Configure apache virtual hosts
 sudo rm /etc/apache2/sites-enabled/*
+cd ${TRAVIS_BUILD_DIR}/web
 sudo cp -f build/travis-ci-apache /etc/apache2/sites-enabled/000-default.conf
 sudo sed -e "s?%TRAVIS_BUILD_DIR%?$(pwd)?g" --in-place /etc/apache2/sites-enabled/000-default.conf
 sudo service apache2 restart
