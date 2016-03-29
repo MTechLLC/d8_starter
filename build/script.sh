@@ -12,4 +12,5 @@ wget http://selenium-release.storage.googleapis.com/${SELENIUM_MAJ_VERSION}/sele
 java -jar selenium-server-standalone-${SELENIUM_MAJ_VERSION}.${SELENIUM_MIN_VERSION}.jar > /dev/null &
 sleep 5
 # Install & run Behat tests.
-cd ${TRAVIS_BUILD_DIR}/test && behat
+cd ${TRAVIS_BUILD_DIR}/test
+${TRAVIS_BUILD_DIR}/vendor/bin/behat
