@@ -1,9 +1,9 @@
 <VirtualHost *:80>
-  DocumentRoot %DOCROOT%
+  DocumentRoot %TRAVIS_BUILD_DIR%/web
   ServerName travis
   ErrorLog /var/log/apache2/travis_error.log
   CustomLog /var/log/apache2/travis_access.log common
-  <Directory "%DOCROOT%">
+  <Directory "%TRAVIS_BUILD_DIR%/web">
     Options FollowSymLinks MultiViews ExecCGI
     AllowOverride All
     Order deny,allow
