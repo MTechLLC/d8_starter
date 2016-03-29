@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 set -ev
 # Run core's PHPUnit tests cause they are fast.
-$(phpenv which php) ${TRAVIS_BUILD_DIR}/web/core/scripts/run-tests.sh --php $(phpenv which php) --sqlite ${TRAVIS_BUILD_DIR}/travis.sqlite PHPUnit
+cd ${TRAVIS_BUILD_DIR}/web
+$(phpenv which php) ./core/scripts/run-tests.sh --php $(phpenv which php) --sqlite ${TRAVIS_BUILD_DIR}/travis.sqlite PHPUnit
 # Set up selenium.
 sh -e /etc/init.d/xvfb start
 export DISPLAY=:99.0
