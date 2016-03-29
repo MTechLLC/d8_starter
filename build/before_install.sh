@@ -9,7 +9,7 @@ echo "Vendor cache content:"
 ls -lh ${HOME}/vendor-cache/
 cachefile="`echo -n ${TRAVIS_PHP_VERSION} | sha1sum | cut -d " " -f 1`.tar"
 echo "cachefile = ${cachefile}"
-[[ -f ${HOME}/vendor-cache/${cachefile} ]];
+if [[ -f ${HOME}/vendor-cache/${cachefile} ]]
 then
   tar -xf ${HOME}/vendor-cache/${cachefile}
 fi
