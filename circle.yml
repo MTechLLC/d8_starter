@@ -10,8 +10,6 @@ machine:
 ## Customize checkout
 checkout:
   post:
-    # Disable xdebug.
-    - phpenv config-rm xdebug.ini
     # Disable sendmail for local PHP for install.
     - echo sendmail_path=`which true` >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/sendmail_disable.ini
     # Update composer.
