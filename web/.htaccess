@@ -185,3 +185,11 @@ AddEncoding gzip svgz
   # Disable content sniffing, since it's an attack vector.
   Header always set X-Content-Type-Options nosniff
 </IfModule>
+
+# Get around redircts with fastcgi on travis.
+<IfModule mod_fastcgi.c>
+  <IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteRule ^/php5-fcgi - [L]
+  </IfModule>
+</IfModule>
