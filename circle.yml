@@ -77,8 +77,3 @@ test:
     #branch: master
     #commands:
       #- git push %git repo% ${CIRCLE_SHA1}:master
-
-## Custom notifications
-notify:
-  webhooks:
-    - url: https://hooks.slack.com/services/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
