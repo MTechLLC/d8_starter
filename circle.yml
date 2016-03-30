@@ -32,8 +32,14 @@ dependencies:
     # Provide db connection string for Drupal installation.
     - printf "<?php\n\$databases['default']['default'] = ['database' => 'circle_test', 'username' => 'ubuntu', 'password' => '', 'prefix' => '', 'host' => 'localhost', 'port' => '3306', 'namespace' => 'Drupal\\Core\\Database\\Driver\\mysql', 'driver' => 'mysql'];" > ./web/sites/default/settings.local.php
 
-      # Install Drupal.
-    - ./vendor/bin/drush --root=./web site-install config_installer -y --verbose --db-url=${DATABASE_URL} --db-su='ubuntu' --db-su-pw=''
+    # Install Drupal.
+    - cd web
+    - pwd
+    - ../vendor/bin/drush site-install config_installer -y --verbose --db-url=${DATABASE_URL} --db-su='ubuntu' --db-su-pw=''
+    - cd ~
+    - pwd
+    - cd /tmp
+    - pwd
 
     # Install PhantomJS
     - sudo apt-get update; sudo apt-get install libicu52
