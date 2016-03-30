@@ -63,8 +63,7 @@ test:
     - $(phpenv which php) ./core/scripts/run-tests.sh --php $(phpenv which php) --sqlite ~/travis.sqlite PHPUnit
 
     # Run PhantomJS
-    - "phantomjs --ssl-protocol=any --ignore-ssl-errors=true ~/vendor/jcalderonzumba/gastonjs/src/Client/main.js 8510 1024 768 2>&1 > /tmp/gastonjs.log":
-      background: true
+    - nohup phantomjs --ssl-protocol=any --ignore-ssl-errors=true ~/vendor/jcalderonzumba/gastonjs/src/Client/main.js 8510 1024 768 2>&1 > /tmp/gastonjs.log &
 
     # Run Behat tests.
     - cd ../test
