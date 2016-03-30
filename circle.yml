@@ -22,20 +22,21 @@ dependencies:
   pre:
 
     # Run composer install and cache it.
-    - if [[ ! -d ~/vendor-cache ]]; then mkdir ~/vendor-cache; fi
-    - if [[ -f ~/vendor-cache/${VENDOR_TAR} ]]; then tar -xf ~/vendor-cache/${VENDOR_TAR}; fi
-    - if [[ -d ~/vendor/ ]]; then echo "Size of vendor directory extracted from cache:"; du -hs ~/vendor/; else echo "Vendor directory does not exist"; fi
-    - composer --verbose --prefer-dist install
-    - if [[ -f ~/vendor-cache/${VENDOR_TAR} ]]; then echo "Deleting previous cache archive"; rm -fv ~/vendor-cache/$VENDOR_TAR; echo "Done"; else echo "No cache archive to delete"; fi
-    - echo "Creating cache archive"; tar -cf ~/vendor-cache/$VENDOR_TAR ~/vendor/; echo "Done"
-    - echo "Size of cache archive:"; ls -lh ~/vendor-cache/$VENDOR_TAR
+    pwd:
+      - if [[ ! -d ~/vendor-cache ]]; then mkdir ~/vendor-cache; fi
+      - if [[ -f ~/vendor-cache/${VENDOR_TAR} ]]; then mkdir vendor; tar -xf ~/vendor-cache/${VENDOR_TAR} -C ./vendor; fi
+      - if [[ -d ./vendor/ ]]; then echo "Size of vendor directory extracted from cache:"; du -hs ./vendor/; else echo "Vendor directory does not exist"; fi
+      - composer --verbose --prefer-dist install
+      - if [[ -f ~/vendor-cache/${VENDOR_TAR} ]]; then echo "Deleting previous cache archive"; rm -fv ~/vendor-cache/$VENDOR_TAR; echo "Done"; else echo "No cache archive to delete"; fi
+      - echo "Creating cache archive"; tar -cf ~/vendor-cache/$VENDOR_TAR ./vendor/; echo "Done"
+      - echo "Size of cache archive:"; ls -lh ~/vendor-cache/$VENDOR_TAR
 
     # Provide db connection string for Drupal installation.
-    - cat "<?php\n\$databases['default']['default'] = ['database' => 'circle_test', 'username' => 'ubuntu', 'password' => '', 'prefix' => '', 'host' => 'localhost', 'port' => '3306', 'namespace' => 'Drupal\\Core\\Database\\Driver\\mysql', 'driver' => 'mysql'];" > ~/web/sites/default/settings.local.php
+      - printf "<?php\n\$databases['default']['default'] = ['database' => 'circle_test', 'username' => 'ubuntu', 'password' => '', 'prefix' => '', 'host' => 'localhost', 'port' => '3306', 'namespace' => 'Drupal\\Core\\Database\\Driver\\mysql', 'driver' => 'mysql'];" > ./web/sites/default/settings.local.php
 
-    # Install Drupal.
-    - cd web
-    - ../vendor/bin/drush site-install config_installer -y --verbose --db-url={$DATABASE_URL} --db-su='circle_test' --db-su-pw=''
+      # Install Drupal.
+      - cd web
+      - ../vendor/bin/drush site-install config_installer -y --verbose --db-url={$DATABASE_URL} --db-su='circle_test' --db-su-pw=''
 
     # Install PhantomJS
     - sudo apt-get update; sudo apt-get install libicu52
@@ -48,9 +49,10 @@ dependencies:
 
   post:
     # Configure apache vhost.
-    - cp ~/build/circleci/apache-vhost.conf /etc/apache2/sites-available
-    - sudo a2ensite apache-vhost
-    - sudo service apache2 restart
+    pwd:
+      - cp ./build/circleci/apache-vhost.conf /etc/apache2/sites-available
+      - sudo a2ensite apache-vhost
+      - sudo service apache2 restart
 
   # Cache composer.
   cache_directories:
@@ -64,7 +66,8 @@ test:
     - $(phpenv which php) ./core/scripts/run-tests.sh --php $(phpenv which php) --sqlite ~/travis.sqlite PHPUnit
 
     # Run PhantomJS
-    - phantomjs --ssl-protocol=any --ignore-ssl-errors=true ~/vendor/jcalderonzumba/gastonjs/src/Client/main.js 8510 1024 768 2>&1 > /tmp/gastonjs.log &
+    background:
+      - phantomjs --ssl-protocol=any --ignore-ssl-errors=true ~/vendor/jcalderonzumba/gastonjs/src/Client/main.js 8510 1024 768 2>&1 > /tmp/gastonjs.log
 
     # Run Behat tests.
     - cd ~/test

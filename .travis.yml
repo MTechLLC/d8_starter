@@ -5,6 +5,9 @@ php:
   - 7.0
 matrix:
   fast_finish: true
+addons:
+  hosts:
+    - travis
 services:
   - mysql
 mysql:
