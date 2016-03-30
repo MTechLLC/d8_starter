@@ -34,12 +34,12 @@ dependencies:
 
     # Install Drupal.
     - cd web
-    - pwd
+    - ls -al
     #- ../vendor/bin/drush site-install config_installer -y --verbose --db-url=${DATABASE_URL} --db-su='ubuntu' --db-su-pw=''
     - cd ~
-    - pwd
+    - ls -al
     - cd /tmp
-    - pwd
+    - ls -al
 
     # Install PhantomJS
     - sudo apt-get update; sudo apt-get install libicu52
