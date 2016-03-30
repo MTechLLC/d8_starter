@@ -31,7 +31,7 @@ dependencies:
     - echo "Size of cache archive:"; ls -lh ~/vendor-cache/$VENDOR_TAR
 
     # Provide db connection string for Drupal installation.
-    - printf "<?php\n\$databases['default']['default'] = ['database' => 'circle_test', 'username' => 'ubuntu', 'password' => '', 'prefix' => '', 'host' => 'localhost', 'port' => '3306', 'namespace' => 'Drupal\\Core\\Database\\Driver\\mysql', 'driver' => 'mysql'];" > ~/web/sites/default/settings.local.php
+    - cat "<?php\n\$databases['default']['default'] = ['database' => 'circle_test', 'username' => 'ubuntu', 'password' => '', 'prefix' => '', 'host' => 'localhost', 'port' => '3306', 'namespace' => 'Drupal\\Core\\Database\\Driver\\mysql', 'driver' => 'mysql'];" > ~/web/sites/default/settings.local.php
 
     # Install Drupal.
     - cd web
