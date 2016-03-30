@@ -4,7 +4,8 @@ phpenv config-rm xdebug.ini
 # Disable sendmail for local PHP for install.
 echo sendmail_path=`which true` >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/sendmail_disable.ini
 
-# Create an hash corresponding to the PHP version.
+# Restore vendor directory from cache.
+if [[ ! -d ${HOME}/vendor-cache ]]; then mkdir ${HOME}/vendor-cache; fi
 echo "Vendor cache content:"
 ls -lh ~/vendor-cache/
 cachefile="`echo -n ${TRAVIS_PHP_VERSION} | sha1sum | cut -d " " -f 1`.tar"

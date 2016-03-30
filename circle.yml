@@ -21,6 +21,7 @@ dependencies:
   pre:
 
     # Run composer install and cache it.
+    if [[ ! -d ~/vendor-cache ]]; then mkdir ~/vendor-cache; fi
     - vendor_tar="vendor.tar"
     - if [[ -f ~/vendor-cache/${vendor_tar} ]]; then tar -xf ~/vendor-cache/${vendor_tar}; fi
     - if [[ -d ~/vendor/ ]]; then echo "Size of vendor directory extracted from cache:"; du -hs ~/vendor/; else echo "Vendor directory does not exist"; fi
