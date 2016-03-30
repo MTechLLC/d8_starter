@@ -11,7 +11,7 @@ default:
   extensions:
     Behat\MinkExtension:
       goutte: ~
-      base_url: http://localhost
+      base_url: http://localhost:8080
       phantomjs:
           phantom_server: "http://localhost:8510/api"
           template_cache: "/tmp/pjsdrivercache/phantomjs"

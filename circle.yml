@@ -5,17 +5,17 @@ machine:
         version:
             7.0.4
     environment:
-        DATABASE_URL: mysql://ubuntu:@127.0.0.1:3306/drupal
         VENDOR_TAR: "vendor.tar"
+
+    # Override /etc/hosts
+    hosts:
+        localhost: 127.0.0.1
 
 ## Customize checkout
 checkout:
     post:
         # Disable sendmail for local PHP for install.
         - echo sendmail_path=`which true` >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/sendmail_disable.ini
-
-        # Additional logging for Apache & PHP.
-        - echo "error_log = /var/log/apache2/vhost_php_error.log" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/error_log.ini
 
 ## Customize dependencies
 dependencies:
@@ -29,36 +29,30 @@ dependencies:
         - echo "Creating cache archive"; tar -cf ~/vendor-cache/$VENDOR_TAR ./vendor/; echo "Done"
         - echo "Size of cache archive:"; ls -lh ~/vendor-cache/$VENDOR_TAR
 
-        # Provide db connection string for Drupal installation.
-        - printf "<?php\n\$databases['default']['default'] = ['database' => 'drupal', 'username' => 'ubuntu', 'password' => '', 'prefix' => '', 'host' => 'localhost', 'port' => '3306', 'namespace' => 'Drupal\\Core\\Database\\Driver\\mysql', 'driver' => 'mysql'];" > ./web/sites/default/settings.local.php
-
-        # Install Drupal.
-        - ../vendor/bin/drush site-install config_installer -y --verbose --db-url=${DATABASE_URL} --db-su='ubuntu' --db-su-pw='':
-            pwd: web
-
-        # Configure PhantomJS
-        - mkdir -p /tmp/pjsdrivercache/phantomjs
-
-    post:
-        # Configure apache vhost.
-        - cp ./web/build/circleci/apache-vhost.conf /etc/apache2/sites-available
-        - sudo a2ensite apache-vhost
-        - sudo service apache2 restart
-
     # Cache composer.
     cache_directories:
         - "~/.composer/cache"
         - "~/vendor-cache/"
-database:
-    override:
-        - mysql -e -u ubuntu 'CREATE DATABASE IF NOT EXISTS drupal;'
 test:
+    pre:
+        # Install Drupal.
+        - ../vendor/bin/drush site-install --verbose --yes config_installer --db-url=sqlite://tmp/site.sqlite:
+            pwd: web
+        - ../vendor/bin/drush runserver --dns localhost:8080 -:
+            pwd: web
+            background: true
+        - sleep 3
+
+        # Configure PhantomJS
+        - mkdir -p /tmp/pjsdrivercache/phantomjs
     override:
         # Run phpunit tests.
-        - $(phpenv which php) web/core/scripts/run-tests.sh --php $(phpenv which php) --sqlite ~/travis.sqlite PHPUnit
+        - vendor/bin/phpunit -c web/core --exclude-group Composer
 
         # Run PhantomJS
-        - nohup phantomjs --ssl-protocol=any --ignore-ssl-errors=true ~/vendor/jcalderonzumba/gastonjs/src/Client/main.js 8510 1024 768 2>&1 > /tmp/gastonjs.log &
+        - phantomjs --ssl-protocol=any --ignore-ssl-errors=true ~/vendor/jcalderonzumba/gastonjs/src/Client/main.js 8510 1024 768 2>&1 > /tmp/gastonjs.log:
+            background: true
+
 
         # Run Behat tests.
         - test/vendor/bin/behat --version
