@@ -5,7 +5,7 @@ machine:
         version:
             7.0.4
     environment:
-        DATABASE_URL: mysql://ubuntu:@127.0.0.1:3306/drupal8
+        DATABASE_URL: mysql://ubuntu:@127.0.0.1:3306/drupal
         VENDOR_TAR: "vendor.tar"
 
 ## Customize checkout
@@ -30,7 +30,7 @@ dependencies:
         - echo "Size of cache archive:"; ls -lh ~/vendor-cache/$VENDOR_TAR
 
         # Provide db connection string for Drupal installation.
-        - printf "<?php\n\$databases['default']['default'] = ['database' => 'drupal8', 'username' => 'ubuntu', 'password' => '', 'prefix' => '', 'host' => 'localhost', 'port' => '3306', 'namespace' => 'Drupal\\Core\\Database\\Driver\\mysql', 'driver' => 'mysql'];" > ./web/sites/default/settings.local.php
+        - printf "<?php\n\$databases['default']['default'] = ['database' => 'drupal', 'username' => 'ubuntu', 'password' => '', 'prefix' => '', 'host' => 'localhost', 'port' => '3306', 'namespace' => 'Drupal\\Core\\Database\\Driver\\mysql', 'driver' => 'mysql'];" > ./web/sites/default/settings.local.php
 
         # Install Drupal.
         - ../vendor/bin/drush site-install config_installer -y --verbose --db-url=${DATABASE_URL} --db-su='ubuntu' --db-su-pw='':
@@ -51,7 +51,7 @@ dependencies:
         - "~/vendor-cache/"
 database:
     override:
-        - mysql -e -u ubuntu 'CREATE DATABASE IF NOT EXISTS drupal8;'
+        - mysql -e -u ubuntu 'CREATE DATABASE IF NOT EXISTS drupal;'
 test:
     override:
         # Run phpunit tests.

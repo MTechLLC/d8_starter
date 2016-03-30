@@ -188,5 +188,8 @@ AddEncoding gzip svgz
 
 # Get around redircts with fastcgi on travis.
 <IfModule mod_fastcgi.c>
-  RewriteRule ^/php5-fcgi - [L]
+  <IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteRule ^/php5-fcgi - [L]
+  </IfModule>
 </IfModule>
