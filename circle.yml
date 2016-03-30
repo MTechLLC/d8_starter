@@ -47,10 +47,9 @@ dependencies:
 
   post:
     # Configure apache vhost.
-    pwd:
-      - cp ./build/circleci/apache-vhost.conf /etc/apache2/sites-available
-      - sudo a2ensite apache-vhost
-      - sudo service apache2 restart
+    - cp ./build/circleci/apache-vhost.conf /etc/apache2/sites-available
+    - sudo a2ensite apache-vhost
+    - sudo service apache2 restart
 
   # Cache composer.
   cache_directories:
