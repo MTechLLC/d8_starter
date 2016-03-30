@@ -51,7 +51,7 @@ dependencies:
         - "~/vendor-cache/"
 database:
     override:
-        mysql -e -u ubuntu 'CREATE DATABASE IF NOT EXISTS drupal8;'
+        - mysql -e -u ubuntu 'CREATE DATABASE IF NOT EXISTS drupal8;'
 test:
     override:
         # Run phpunit tests.
