@@ -34,7 +34,8 @@ dependencies:
 
       # Install Drupal.
     - cd web
-    - chmod 644 sites/default/settings.php
+    - pwd
+    - sudo chmod 644 sites/default/settings.php
     - ../vendor/bin/drush site-install config_installer -y --verbose --db-url=${DATABASE_URL} --db-su='ubuntu' --db-su-pw=''
 
     # Install PhantomJS
