@@ -6,6 +6,7 @@ machine:
             7.0.4
     environment:
         VENDOR_TAR: "vendor.tar"
+        SIMPLETEST_DB: "sqlite://tmp/site.sqlite"
 
     # Override /etc/hosts
     hosts:
@@ -35,8 +36,11 @@ dependencies:
         - "~/vendor-cache/"
 test:
     pre:
+        # Provide db connection string for Drupal installation.
+        - printf "<?php\n\$databases['default']['default'] = ['database' => 'tmp/site.sqlite', 'prefix' => '', 'namespace' => 'Drupal\\Core\\Database\\Driver\\sqlite', 'driver' => 'sqlite'];" > ./web/sites/default/settings.local.php
+
         # Install Drupal.
-        - ../vendor/bin/drush site-install --verbose --yes config_installer --db-url=sqlite://tmp/site.sqlite:
+        - ../vendor/bin/drush site-install --verbose --yes config_installer --db-url=${SIMPLETEST_DB}:
             pwd: web
         - ../vendor/bin/drush runserver --dns localhost:8080 -:
             pwd: web
@@ -55,8 +59,9 @@ test:
 
 
         # Run Behat tests.
-        - test/vendor/bin/behat --version
-        - test/vendor/bin/behat
+        - vendor/bin/behat --version
+        - ../vendor/bin/behat:
+            pwd: web
 
 ## Customize deployment commands
 #deployment:
