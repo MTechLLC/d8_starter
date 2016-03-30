@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 set -ev
 # Add repo and install apache & fastcgi.
-sudo apt-add-repository multiverse && sudo apt-get update
 sudo apt-get install apache2 libapache2-mod-fastcgi -yq --no-install-suggests --no-install-recommends
 # Enable php-fpm.
 sudo a2enmod rewrite actions fastcgi alias
@@ -13,6 +12,7 @@ then
 fi
 echo "cgi.fix_pathinfo = 1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
 echo "error_log = /var/log/apache2/vhost_php_error.log" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+echo "error_log = /var/log/apache2/vhost_php_error.log" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.ini
 ~/.phpenv/versions/$(phpenv version-name)/sbin/php-fpm
 # Disable sendmail for FPM for when serving the actual site.
 echo sendmail_path=`which true` >> ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.ini
