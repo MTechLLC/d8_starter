@@ -13,11 +13,12 @@ checkout:
     # Disable sendmail for local PHP for install.
     - echo sendmail_path=`which true` >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/sendmail_disable.ini
 
+    # Additional logging for Apache & PHP.
+    - echo "error_log = /var/log/apache2/vhost_php_error.log" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/error_log.ini
+
 ## Customize dependencies
 dependencies:
   pre:
-    # Additional logging for Apache & PHP.
-    - echo "error_log = /var/log/apache2/vhost_php_error.log" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
 
     # Run composer install and cache it.
     - vendor_tar="vendor.tar"
