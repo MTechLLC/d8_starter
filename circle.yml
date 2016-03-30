@@ -33,8 +33,7 @@ dependencies:
     - printf "<?php\n\$databases['default']['default'] = ['database' => 'circle_test', 'username' => 'ubuntu', 'password' => '', 'prefix' => '', 'host' => 'localhost', 'port' => '3306', 'namespace' => 'Drupal\\Core\\Database\\Driver\\mysql', 'driver' => 'mysql'];" > ./web/sites/default/settings.local.php
 
     # Install Drupal.
-    - ../vendor/bin/drush site-install config_installer -y --verbose --db-url=${DATABASE_URL} --db-su='ubuntu' --db-su-pw='':
-      pwd: web
+    - vendor/bin/drush --root=~/${CIRCLE_PROJECT_REPONAME}/web --uri=http://localhost site-install config_installer -y --verbose --db-url=${DATABASE_URL} --db-su='ubuntu' --db-su-pw=''
 
     # Configure PhantomJS
     - mkdir -p /tmp/pjsdrivercache/phantomjs
@@ -53,17 +52,14 @@ dependencies:
 test:
   override:
     # Run phpunit tests.
-    - $(phpenv which php) ./core/scripts/run-tests.sh --php $(phpenv which php) --sqlite ~/travis.sqlite PHPUnit:
-      pwd: web
+    - $(phpenv which php) web/core/scripts/run-tests.sh --php $(phpenv which php) --sqlite ~/travis.sqlite PHPUnit
 
     # Run PhantomJS
     - nohup phantomjs --ssl-protocol=any --ignore-ssl-errors=true ~/vendor/jcalderonzumba/gastonjs/src/Client/main.js 8510 1024 768 2>&1 > /tmp/gastonjs.log &
 
     # Run Behat tests.
-    - ../vendor/bin/behat --version:
-      pwd: test
-    - ../vendor/bin/behat:
-      pwd: test
+    - test/vendor/bin/behat --version
+    - test/vendor/bin/behat
 
 ## Customize deployment commands
 #deployment:
