@@ -47,6 +47,7 @@ dependencies:
     - tar jxf phantomjs-2.1.1-linux-x86_64.tar.bz2
     - chmod 755 ~/phantomjs-2.1.1-linux-x86_64/bin/phantomjs
     - sudo ln -s --force ~/phantomjs-2.1.1-linux-x86_64/bin/phantomjs /usr/local/bin/phantomjs
+    - mkdir /tmp/pjsdrivercache/phantomjs
 
   post:
     # Configure apache vhost.
@@ -65,8 +66,10 @@ test:
     - cd ~/web
     - $(phpenv which php) ./core/scripts/run-tests.sh --php $(phpenv which php) --sqlite ~/travis.sqlite PHPUnit
 
-    # Run Behat tests.
+    # Run PhantomJS
     - phantomjs --ssl-protocol=any --ignore-ssl-errors=true ~/vendor/jcalderonzumba/gastonjs/src/Client/main.js 8510 1024 768 2>&1 > /tmp/gastonjs.log &
+
+    # Run Behat tests.
     - cd ~/test
     - ~/vendor/bin/behat --version
     - ~/vendor/bin/behat
