@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 set -ev
 # Run core's PHPUnit tests cause they are fast.
-export SIMPLETEST_DB: "sqlite://tmp/site.sqlite"
-export SIMPLETEST_BASE_URL: "http://localhost:8080"
+export SIMPLETEST_DB="sqlite://tmp/site.sqlite"
+export SIMPLETEST_BASE_URL="http://localhost:8080"
 cd ${TRAVIS_BUILD_DIR}/web
 ${TRAVIS_BUILD_DIR}/vendor/bin/phpunit -c core --exclude-group Composer
 # Run PhantomJS.
