@@ -1,0 +1,84 @@
+machine:
+  timezone:
+    America/Los_Angeles
+  php:
+    version:
+      7.0.4
+  environment:
+    DATABASE_URL: mysql://ubuntu:@127.0.0.1:3306/circle_test
+
+## Customize checkout
+checkout:
+  post:
+    # Disable xdebug.
+    - phpenv config-rm xdebug.ini
+    # Disable sendmail for local PHP for install.
+    - echo sendmail_path=`which true` >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/sendmail_disable.ini
+    # Update composer.
+    - composer --verbose self-update
+    - composer --version
+
+## Customize dependencies
+dependencies:
+  pre:
+    # Additional logging for Apache & PHP.
+    - echo "error_log = /var/log/apache2/vhost_php_error.log" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+
+    # Run composer install and cache it.
+    - vendor_tar="vendor.tar"
+    - if [[ -f ~/vendor-cache/${vendor_tar} ]]; then tar -xf ~/vendor-cache/${vendor_tar}; fi
+    - if [[ -d ~/vendor/ ]]; then echo "Size of vendor directory extracted from cache:"; du -hs ~/vendor/; else echo "Vendor directory does not exist"; fi
+    - composer --verbose --prefer-dist install
+    - if [[ -f ~/vendor-cache/$vendor_tar ]]; then echo "Deleting previous cache archive"; rm -fv ~/vendor-cache/$vendor_tar; echo "Done"; else echo "No cache archive to delete"; fi
+    - echo "Creating cache archive"; tar -cf ~/vendor-cache/$vendor_tar ~/vendor/; echo "Done"
+    - echo "Size of cache archive:"; ls -lh ~/vendor-cache/$vendor_tar
+
+    # Provide db connection string for Drupal installation.
+    - printf "<?php\n\$databases['default']['default'] = ['database' => 'circle_test', 'username' => 'ubuntu', 'password' => '', 'prefix' => '', 'host' => 'localhost', 'port' => '3306', 'namespace' => 'Drupal\\Core\\Database\\Driver\\mysql', 'driver' => 'mysql'];" > ~/web/sites/default/settings.local.php
+
+    # Install Drupal.
+    - cd web
+    - ../vendor/bin/drush site-install config_installer -y --verbose --db-url={$DATABASE_URL} --db-su='circle_test' --db-su-pw=''
+
+    # Install PhantomJS
+    - sudo apt-get update; sudo apt-get install libicu52
+    - cd ~
+    - wget https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-linux-x86_64.tar.bz2
+    - tar jxf phantomjs-2.1.1-linux-x86_64.tar.bz2
+    - chmod 755 ~/phantomjs-2.1.1-linux-x86_64/bin/phantomjs
+    - sudo ln -s --force ~/phantomjs-2.1.1-linux-x86_64/bin/phantomjs /usr/local/bin/phantomjs
+
+  post:
+    # Configure apache vhost.
+    - cp ~/build/circleci/apache-vhost.conf /etc/apache2/sites-available
+    - sudo a2ensite apache-vhost
+    - sudo service apache2 restart
+
+  # Cache composer.
+  cache_directories:
+    - "~/.composer/cache
+    - "~/vendor-cache/"
+
+test:
+  override:
+    # Run phpunit tests.
+    - cd ~/web
+    - $(phpenv which php) ./core/scripts/run-tests.sh --php $(phpenv which php) --sqlite ~/travis.sqlite PHPUnit
+
+    # Run Behat tests.
+    - phantomjs --ssl-protocol=any --ignore-ssl-errors=true ~/vendor/jcalderonzumba/gastonjs/src/Client/main.js 8510 1024 768 2>&1 > /tmp/gastonjs.log &
+    - cd ~/test
+    - ~/vendor/bin/behat --version
+    - ~/vendor/bin/behat
+
+## Customize deployment commands
+deployment:
+  development:
+    branch: master
+    commands:
+      #- git push %git repo% ${CIRCLE_SHA1}:master
+
+## Custom notifications
+notify:
+  webhooks:
+    - url: https://hooks.slack.com/services/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

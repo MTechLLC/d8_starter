@@ -6,21 +6,10 @@ echo sendmail_path=`which true` >> ~/.phpenv/versions/$(phpenv version-name)/etc
 
 # Create an hash corresponding to the PHP version.
 echo "Vendor cache content:"
-ls -lh ${HOME}/vendor-cache/
+ls -lh ~/vendor-cache/
 cachefile="`echo -n ${TRAVIS_PHP_VERSION} | sha1sum | cut -d " " -f 1`.tar"
-echo "cachefile = ${cachefile}"
-if [[ -f ${HOME}/vendor-cache/${cachefile} ]]
-then
-  tar -xf ${HOME}/vendor-cache/${cachefile}
-fi
-if [[ -d ${HOME}/vendor/ ]]
-then
-  echo "Size of vendor directory extracted from cache:"
-  du -hs ${HOME}/vendor/
-else
-  echo "vendor directory does not exist"
-fi
-
+if [[ -f ~/vendor-cache/${cachefile} ]]; then tar -xf ~/vendor-cache/${cachefile}; fi
+if [[ -d ~/vendor/ ]]; then echo "Size of vendor directory extracted from cache:"; du -hs ~/vendor/; else echo "Vendor directory does not exist"; fi
 
 composer --verbose self-update
 composer --version

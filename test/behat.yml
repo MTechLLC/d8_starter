@@ -12,7 +12,10 @@ default:
     Behat\MinkExtension:
       goutte: ~
       base_url: http://localhost
-      selenium2: ~
+      phantomjs:
+          phantom_server: "http://localhost:8510/api"
+          template_cache: "/tmp/pjsdrivercache/phantomjs"
+    Zumba\PhantomJSExtension:
     Drupal\DrupalExtension:
       blackbox: ~
       text:

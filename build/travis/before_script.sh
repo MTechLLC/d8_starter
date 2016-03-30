@@ -12,7 +12,7 @@ then
   cp ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.d/www.conf.default ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.d/www.conf
 fi
 echo "cgi.fix_pathinfo = 1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
-echo "error_log = /var/log/apache2/travis_php_error.log" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+echo "error_log = /var/log/apache2/vhost_php_error.log" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
 ~/.phpenv/versions/$(phpenv version-name)/sbin/php-fpm
 # Disable sendmail for FPM for when serving the actual site.
 echo sendmail_path=`which true` >> ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.ini
@@ -22,6 +22,6 @@ echo "apc.shm_size=256M" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php-fp
 # Configure apache virtual hosts
 sudo rm /etc/apache2/sites-enabled/*
 cd ${TRAVIS_BUILD_DIR}/web
-sudo cp -f build/travis-ci-apache /etc/apache2/sites-enabled/000-default.conf
-sudo sed -e "s?%TRAVIS_BUILD_DIR%?$(pwd)?g" --in-place /etc/apache2/sites-enabled/000-default.conf
+sudo cp -f ${TRAVIS_BUILD_DIR}/build/apache-vhost.conf /etc/apache2/sites-enabled/000-default.conf
+sudo sed -e "s?%BUILD_DIR%?$(pwd)?g" --in-place /etc/apache2/sites-enabled/000-default.conf
 sudo service apache2 restart
