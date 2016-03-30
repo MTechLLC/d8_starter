@@ -34,7 +34,7 @@ dependencies:
 
     # Install Drupal.
     - pwd && ../vendor/bin/drush site-install config_installer -y --verbose --db-url=${DATABASE_URL} --db-su='ubuntu' --db-su-pw=''
-        pwd: web
+        pwd: ~/${CIRCLE_PROJECT_REPONAME}/web
 
     # Configure PhantomJS
     - mkdir -p /tmp/pjsdrivercache/phantomjs
