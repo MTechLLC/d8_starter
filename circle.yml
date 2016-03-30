@@ -35,7 +35,7 @@ dependencies:
     # Install Drupal.
     - cd web
     - pwd
-    - ../vendor/bin/drush site-install config_installer -y --verbose --db-url=${DATABASE_URL} --db-su='ubuntu' --db-su-pw=''
+    #- ../vendor/bin/drush site-install config_installer -y --verbose --db-url=${DATABASE_URL} --db-su='ubuntu' --db-su-pw=''
     - cd ~
     - pwd
     - cd /tmp
