@@ -7,7 +7,7 @@ cd ${TRAVIS_BUILD_DIR}/web
 ${TRAVIS_BUILD_DIR}/vendor/bin/phpunit -c core --exclude-group Composer
 # Run PhantomJS.
 mkdir -p /tmp/pjsdrivercache/phantomjs
-phantomjs --ssl-protocol=any --ignore-ssl-errors=true ~/vendor/jcalderonzumba/gastonjs/src/Client/main.js 8510 1024 768 2>&1 > /tmp/gastonjs.log &
+phantomjs --ssl-protocol=any --ignore-ssl-errors=true ${TRAVIS_BUILD_DIR}/vendor/jcalderonzumba/gastonjs/src/Client/main.js 8510 1024 768 2>&1 > /tmp/gastonjs.log &
 # Install & run Behat tests.
 cd ${TRAVIS_BUILD_DIR}/test
 ${TRAVIS_BUILD_DIR}/vendor/bin/behat --version
