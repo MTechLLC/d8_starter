@@ -34,8 +34,7 @@ dependencies:
 
     # Install Drupal.
     - ../vendor/bin/drush site-install config_installer -y --verbose --db-url=${DATABASE_URL} --db-su='ubuntu' --db-su-pw='':
-      pwd:
-        web
+      pwd: web
 
     # Configure PhantomJS
     - mkdir -p /tmp/pjsdrivercache/phantomjs
@@ -55,19 +54,16 @@ test:
   override:
     # Run phpunit tests.
     - $(phpenv which php) ./core/scripts/run-tests.sh --php $(phpenv which php) --sqlite ~/travis.sqlite PHPUnit:
-      pwd:
-        web
+      pwd: web
 
     # Run PhantomJS
     - nohup phantomjs --ssl-protocol=any --ignore-ssl-errors=true ~/vendor/jcalderonzumba/gastonjs/src/Client/main.js 8510 1024 768 2>&1 > /tmp/gastonjs.log &
 
     # Run Behat tests.
     - ../vendor/bin/behat --version:
-      pwd:
-        test
+      pwd: test
     - ../vendor/bin/behat:
-      pwd:
-        test
+      pwd: test
 
 ## Customize deployment commands
 #deployment:
