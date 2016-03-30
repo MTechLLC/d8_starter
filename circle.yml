@@ -56,7 +56,7 @@ dependencies:
 
   # Cache composer.
   cache_directories:
-    - "~/.composer/cache
+    - "~/.composer/cache"
     - "~/vendor-cache/"
 
 test:
