@@ -72,10 +72,10 @@ test:
     - ~/vendor/bin/behat
 
 ## Customize deployment commands
-deployment:
-  development:
-    branch: master
-    commands:
+#deployment:
+  #development:
+    #branch: master
+    #commands:
       #- git push %git repo% ${CIRCLE_SHA1}:master
 
 ## Custom notifications
