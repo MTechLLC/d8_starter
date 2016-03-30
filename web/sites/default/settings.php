@@ -244,7 +244,10 @@
  *   );
  * @endcode
  */
-$config_directories = array();
+
+$config_directories = array(
+  CONFIG_SYNC_DIRECTORY => '../config',
+);
 
 /**
  * Settings:
@@ -266,7 +269,7 @@ $config_directories = array();
  *
  * @see install_select_profile()
  */
-# $settings['install_profile'] = '';
+$settings['install_profile'] = 'standard';
 
 /**
  * Salt for one-time login links, cancel links, form tokens, etc.
@@ -285,7 +288,7 @@ $config_directories = array();
  *   $settings['hash_salt'] = file_get_contents('/home/example/salt.txt');
  * @endcode
  */
-$settings['hash_salt'] = 'KY9_ACWBrkWIBcK0sQWlpkgpt4MUA9v0llr7Sz0u2K6uYjYSFMPh0oJTkpFnCYe4S7pafFvBfg';
+$settings['hash_salt'] = 'LoeYEgK5sFXmTS0lcJemr34EEXMXMkGl041We5fHvh63qF3I2CXzJpavxc99O4Lmx-NyTz8CsQ';
 
 /**
  * Deployment identifier.
@@ -703,6 +706,13 @@ $settings['container_yamls'][] = __DIR__ . '/services.yml';
  * will allow the site to run off of all variants of example.com and
  * example.org, with all subdomains included.
  */
+$settings['trusted_host_patterns'] = [
+  '^.+\.local',
+  '^.+\.sandbox',
+];
+
+// Disable config changes in managed environments.
+$settings['config_readonly'] = TRUE;
 
 /**
  * Load local development override configuration, if available.
@@ -714,14 +724,6 @@ $settings['container_yamls'][] = __DIR__ . '/services.yml';
  *
  * Keep this code block at the end of this file to take full effect.
  */
-# if (file_exists(__DIR__ . '/settings.local.php')) {
-#   include __DIR__ . '/settings.local.php';
-# }
-$databases['default']['default'] = array (
-  'database' => 'tmp/site.sqlite',
-  'prefix' => '',
-  'namespace' => 'Drupal\\Core\\Database\\Driver\\sqlite',
-  'driver' => 'sqlite',
-);
-$settings['install_profile'] = 'config_installer';
-$config_directories['sync'] = 'sites/default/files/config_dnuVNqvbFsHYdTOQnE7e910irOfbVz47LPNsS3JLh_e7q0sOq3TH05S6jDfdfvUvxrsQO8bwTA/sync';
+if (file_exists(__DIR__ . '/settings.local.php')) {
+  include __DIR__ . '/settings.local.php';
+}
