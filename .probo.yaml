@@ -1,0 +1,15 @@
+assets:
+  - dev.sql.gz
+steps:
+  - name: Composer install
+    command: 'cd /src; composer self-update; composer install --prefer-dist;'
+  - name: Drupal setup
+    plugin: Drupal
+    database: dev.sql.gz
+    databaseGzipped: true
+    databaseUpdates: true
+    subDirectory: web
+    drupalVersion: 8
+    settingsAppend: "$config_directories = array(CONFIG_SYNC_DIRECTORY => '../config');"
+  - name: Configuration Import
+    command: 'drush cim -y; drush cr;'
