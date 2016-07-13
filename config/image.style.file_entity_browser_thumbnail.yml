@@ -1,0 +1,17 @@
+uuid: 9962e2cc-9526-4f31-8b83-8461af131115
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: dD2oNaTNxmbg6nLu4Rm49vJR3eZqunZibfSDOHDlDMU
+name: file_entity_browser_thumbnail
+label: 'File Entity Browser thumbnail'
+effects:
+  2002cfd3-6b51-4668-b204-4b33425cf3f7:
+    uuid: 2002cfd3-6b51-4668-b204-4b33425cf3f7
+    id: image_scale
+    weight: 1
+    data:
+      width: 350
+      height: null
+      upscale: false

@@ -1,4 +1,4 @@
-uuid: 4a31904c-27a3-4bfd-a42b-04b815152d16
+uuid: 8c7ec192-11e1-45d8-940c-0aedd807e511
 langcode: en
 status: true
 dependencies: {  }
@@ -7,6 +7,6 @@ _core:
 id: feedback
 label: 'Website feedback'
 recipients:
-  - admin@example.com
+  - ezamle@example.co
 reply: ''
 weight: 0
