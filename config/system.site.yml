@@ -1,6 +1,6 @@
-uuid: 6cbf1265-a12b-4400-bd32-dab5739266fb
-name: Site-Install
-mail: admin@example.com
+uuid: 23886bd5-e15d-4f82-88ce-0d18c2ea6234
+name: 'D8 Starter'
+mail: example@example.com
 slogan: ''
 page:
   403: ''
