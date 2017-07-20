@@ -25,7 +25,7 @@ selection_display_configuration:
   display_settings:
     image_style: file_entity_browser_small
   select_text: 'Use selected'
-  selection_hidden: true
+  selection_hidden: false
 widget_selector: tabs
 widget_selector_configuration: {  }
 widgets:
@@ -34,7 +34,7 @@ widgets:
       view: file_entity_browser
       view_display: entity_browser_1
       submit_text: 'Select entities'
-      auto_select: false
+      auto_select: true
     uuid: a4ad947c-9669-497c-9988-24351955a02f
     weight: 1
     label: 'Files listing'
