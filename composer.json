@@ -110,10 +110,5 @@
         "sites/default/default.settings.local.php": "sites/default/settings.local.php"
       }
     }
-  },
-  "config": {
-    "optimize-autoloader": true,
-    "preferred-install": "dist",
-    "sort-packages": true
   }
 }
