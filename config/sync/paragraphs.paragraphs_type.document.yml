@@ -5,4 +5,5 @@ dependencies: {  }
 id: document
 label: Document
 icon_uuid: null
+description: null
 behavior_plugins: {  }

@@ -5,4 +5,5 @@ dependencies: {  }
 id: text
 label: Text
 icon_uuid: null
+description: null
 behavior_plugins: {  }
