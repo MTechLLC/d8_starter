@@ -4,21 +4,11 @@ status: true
 dependencies:
   config:
     - field.field.paragraph.document.field_columns
-    - field.field.paragraph.document.field_document
     - paragraphs.paragraphs_type.document
 id: paragraph.document.default
 targetEntityType: paragraph
 bundle: document
 mode: default
-content:
-  field_document:
-    weight: 0
-    label: hidden
-    settings:
-      view_mode: default
-      link: false
-    third_party_settings: {  }
-    type: entity_reference_entity_view
-    region: content
+content: {  }
 hidden:
   field_columns: true

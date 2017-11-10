@@ -6,7 +6,6 @@ dependencies:
     - block_content.type.promotion
     - field.field.block_content.promotion.body
     - field.field.block_content.promotion.field_link
-    - field.field.block_content.promotion.field_media
   module:
     - link
     - text
@@ -33,14 +32,5 @@ content:
       target: '0'
     third_party_settings: {  }
     type: link
-    region: content
-  field_media:
-    weight: 0
-    label: hidden
-    settings:
-      view_mode: teaser
-      link: false
-    third_party_settings: {  }
-    type: entity_reference_entity_view
     region: content
 hidden: {  }

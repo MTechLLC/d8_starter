@@ -5,24 +5,11 @@ dependencies:
   config:
     - core.entity_view_mode.paragraph.teaser
     - field.field.paragraph.document.field_columns
-    - field.field.paragraph.document.field_document
-    - image.style.medium
     - paragraphs.paragraphs_type.document
-  module:
-    - media_entity
 id: paragraph.document.teaser
 targetEntityType: paragraph
 bundle: document
 mode: teaser
-content:
-  field_document:
-    weight: 0
-    label: hidden
-    settings:
-      image_style: medium
-      image_link: media
-    third_party_settings: {  }
-    type: media_thumbnail
-    region: content
+content: {  }
 hidden:
   field_columns: true

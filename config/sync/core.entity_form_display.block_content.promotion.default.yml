@@ -4,12 +4,10 @@ status: true
 dependencies:
   config:
     - block_content.type.promotion
-    - entity_browser.browser.image
     - field.field.block_content.promotion.body
     - field.field.block_content.promotion.field_link
-    - field.field.block_content.promotion.field_media
   module:
-    - entity_browser
+    - content_moderation
     - link
     - text
 id: block_content.promotion.default
@@ -33,20 +31,6 @@ content:
       placeholder_title: 'Read more'
     third_party_settings: {  }
     type: link_default
-    region: content
-  field_media:
-    weight: 7
-    settings:
-      entity_browser: image
-      field_widget_display: rendered_entity
-      field_widget_edit: true
-      field_widget_remove: true
-      open: true
-      selection_mode: selection_append
-      field_widget_display_settings:
-        view_mode: preview
-    third_party_settings: {  }
-    type: entity_browser_entity_reference
     region: content
   info:
     type: string_textfield

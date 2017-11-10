@@ -11,6 +11,7 @@ dependencies:
     - node.type.article
   module:
     - comment
+    - content_moderation
     - image
     - path
     - text
@@ -56,6 +57,12 @@ content:
     settings: {  }
     third_party_settings: {  }
     region: content
+  moderation_state:
+    type: moderation_state_default
+    weight: 100
+    settings: {  }
+    region: content
+    third_party_settings: {  }
   path:
     type: path
     weight: 30
@@ -67,6 +74,13 @@ content:
     settings:
       display_label: true
     weight: 15
+    third_party_settings: {  }
+    region: content
+  status:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 121
     third_party_settings: {  }
     region: content
   sticky:

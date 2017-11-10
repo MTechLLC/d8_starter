@@ -19,19 +19,13 @@ module:
   datetime: 0
   dblog: 0
   dropzonejs: 0
-  dropzonejs_eb_widget: 0
   dynamic_page_cache: 0
   editor: 0
   embed: 0
-  entity: 0
-  entity_browser: 0
-  entity_embed: 0
-  entity_reference: 0
   entity_reference_revisions: 0
   field: 0
   field_ui: 0
   file: 0
-  file_browser: 0
   filter: 0
   google_analytics: 0
   help: 0
@@ -40,13 +34,8 @@ module:
   inline_form_errors: 0
   link: 0
   link_attributes: 0
-  media_entity: 0
-  media_entity_document: 0
-  media_entity_image: 0
   menu_ui: 0
   migrate: 0
-  migrate_plus: 0
-  migrate_tools: 0
   node: 0
   options: 0
   page_cache: 0
