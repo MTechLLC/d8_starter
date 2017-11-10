@@ -11,7 +11,8 @@ fi
 
 # Provide default settings for running locally.
 if [ ! -f ./web/sites/default/settings.local.php ]; then
-  cp ./scripts/seed/settings.local.php ./web/sites/default/
+  chmod 777 ./web/sites/default
+  cp ./web/sites/default/default.settings.local.php ./web/sites/default/settings.local.php
 fi
 
 # Allow writing to settings.php
