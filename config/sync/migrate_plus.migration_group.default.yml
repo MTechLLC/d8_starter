@@ -1,0 +1,12 @@
+uuid: 5100b361-04f1-44d1-826e-3d9c49312ea3
+langcode: en
+status: true
+dependencies: {  }
+id: default
+label: Default
+description: ''
+source_type: ''
+module: null
+shared_configuration:
+  source:
+    key: drupal_7
