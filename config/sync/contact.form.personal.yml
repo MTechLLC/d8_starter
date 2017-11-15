@@ -1,13 +1,13 @@
-uuid: aa66daa2-d23e-4468-b298-ed117edfbdd8
+uuid: 47fb9705-ecde-49af-9944-f44e2e290637
 langcode: en
 status: true
 dependencies: {  }
 _core:
-  default_config_hash: 4w1vDIuPlVqNIiynysHZHU-9sBCpx5uiEIPlo4SW1tw
+  default_config_hash: jonvgt3CkUM2eMLTFwWfHileWWDC4YtXCuIlCahTk_I
 id: personal
 label: 'Personal contact form'
 recipients: {  }
 reply: ''
 weight: 0
-message: null
-redirect: null
+message: 'Your message has been sent.'
+redirect: ''

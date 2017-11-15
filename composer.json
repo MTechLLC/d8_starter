@@ -15,7 +15,7 @@
   "require": {
     "composer/installers": "~1",
     "cweagans/composer-patches": "~1",
-    "drupal-composer/drupal-scaffold": "~2",
+    "drupal-composer/drupal-scaffold": "dev-master",
     "drupal/admin_toolbar": "~1",
     "drupal/advagg": "2.x-dev",
     "drupal/bootstrap": "~3",
@@ -30,7 +30,7 @@
     "drupal/inline_entity_form": "1.x-dev",
     "drupal/link_attributes": "~1",
     "drupal/migrate_plus": "~4",
-    "drupal/migrate_tools": "~4",
+    "drupal/migrate_tools": "4.x-dev",
     "drupal/migrate_upgrade": "~3",
     "drupal/ng_lightbox": "~1",
     "drupal/paragraphs": "1.x-dev",
@@ -76,15 +76,19 @@
   },
   "scripts": {
     "drupal-scaffold": "DrupalComposer\\DrupalScaffold\\Plugin::scaffold",
+    "pre-install-cmd": [
+      "DrupalProject\\composer\\ScriptHandler::checkComposerVersion"
+    ],
+    "pre-update-cmd": [
+      "DrupalProject\\composer\\ScriptHandler::checkComposerVersion"
+    ],
     "post-install-cmd": [
-      "DrupalProject\\composer\\ScriptHandler::buildScaffold",
-      "DrupalProject\\composer\\ScriptHandler::createRequiredFiles",
-      "@composer install --working-dir=web/themes/custom/custom_theme/patternlab"
+      "@drupal-scaffold",
+      "DrupalProject\\composer\\ScriptHandler::createRequiredFiles"
     ],
     "post-update-cmd": [
-      "DrupalProject\\composer\\ScriptHandler::buildScaffold",
-      "DrupalProject\\composer\\ScriptHandler::createRequiredFiles",
-      "@composer install --working-dir=web/themes/custom/custom_theme/patternlab"
+      "@drupal-scaffold",
+      "DrupalProject\\composer\\ScriptHandler::createRequiredFiles"
     ]
   },
   "extra": {
@@ -98,11 +102,9 @@
     "patches": {
       "drupal/core": {
         "Inline responsive image styles,etc": "https://www.drupal.org/files/issues/2061377-241.patch"
-      }
-    },
-    "drupal-scaffold": {
-      "initial": {
-        "sites/default/default.settings.local.php": "sites/default/settings.local.php"
+      },
+      "drupal/migrate_tools": {
+        "Implement running migration processes through the UI": "https://www.drupal.org/files/issues/implement_running-2470882-30.patch"
       }
     }
   }

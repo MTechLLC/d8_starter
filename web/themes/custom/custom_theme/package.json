@@ -1,25 +1,37 @@
 {
-  "name": "patternlab_bootstrap",
+  "name": "custom_bootstrap",
   "version": "1.0.0",
-  "description": "Patternlab Drupal 8 Bootstrap",
+  "description": "Custom Drupal 8 Bootstrap",
   "main": "gulpfile.js",
   "private": true,
   "scripts": {
-    "gulp": "gulp",
-    "bower": "bower"
+    "gulp": "gulp"
   },
   "author": "MTech LLC",
   "license": "ISC",
   "devDependencies": {
+    "@bower_components/bootstrap-sass" : "twbs/bootstrap-sass#^3.3.7",
+    "@bower_components/ckeditor" : "ckeditor/ckeditor-releases#^4.5.11",
+    "@bower_components/desandro-matches-selector" : "desandro/matches-selector#~2.0.0",
+    "@bower_components/dropzone" : "enyo/dropzone#^4.3.0",
+    "@bower_components/ev-emitter" : "metafizzy/ev-emitter#^1.0.0",
+    "@bower_components/fizzy-ui-utils" : "metafizzy/fizzy-ui-utils#^2.0.0",
+    "@bower_components/get-size" : "desandro/get-size#^2.0.2",
+    "@bower_components/imagesloaded" : "desandro/imagesloaded#^4.1.1",
+    "@bower_components/jquery" : "jquery/jquery-dist#>=1.3.2",
+    "@bower_components/jquery-colorbox" : "jackmoore/colorbox#^1.6.4",
+    "@bower_components/masonry" : "desandro/masonry#^4.1.1",
+    "@bower_components/matchHeight" : "liabru/jquery-match-height#^0.7.0",
+    "@bower_components/outlayer" : "metafizzy/outlayer#^2.1.0",
     "autoprefixer": "^6.5.0",
-    "bower": "^1.7.9",
-    "es6-promise": "^4.0.3",
     "gulp": "^3.9.1",
-    "gulp-bower": "0.0.13",
     "gulp-clean": "^0.3.2",
     "gulp-postcss": "^6.2.0",
     "gulp-sass": "^2.3.2",
     "gulp-sourcemaps": "^1.6.0",
     "run-sequence": "^1.2.2"
+  },
+  "engines" : {
+    "yarn" : ">= 1.0.0"
   }
 }

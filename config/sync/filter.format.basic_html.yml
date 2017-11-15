@@ -1,4 +1,4 @@
-uuid: 2222cbeb-7c1d-47bd-b206-d277f2b9556c
+uuid: e7e8ada3-10c3-4353-a378-439416432573
 langcode: en
 status: true
 dependencies:
@@ -6,7 +6,7 @@ dependencies:
     - editor
     - image
 _core:
-  default_config_hash: P8ddpAIKtawJDi5SzOwCzVnnNYqONewSTJ6Xn0dW_aQ
+  default_config_hash: _3bZehzXPlVb3oRVT6GEgBD-Qa6VmcLiD7xgqAA4YMc
 name: 'Basic HTML'
 format: basic_html
 weight: 0
@@ -42,7 +42,7 @@ filters:
     id: editor_file_reference
     provider: editor
     status: true
-    weight: 11
+    weight: 10
     settings: {  }
   filter_image_style:
     id: filter_image_style

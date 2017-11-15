@@ -1,4 +1,4 @@
-uuid: 8bffa094-44e9-43e2-9fa2-542ccef69218
+uuid: 91fffe1d-a189-4d92-a3b0-5f0175cbd943
 langcode: en
 status: true
 dependencies:
@@ -6,7 +6,7 @@ dependencies:
     - editor
     - image
 _core:
-  default_config_hash: hewPmBgni9jlDK_IjLxUx1HsTbinK-hdl0lOwjbteIY
+  default_config_hash: vetSoh2fZ6M9Tw9Bs0MImojKRekaPD_wRpa36Joxxhk
 name: 'Full HTML'
 format: full_html
 weight: 1

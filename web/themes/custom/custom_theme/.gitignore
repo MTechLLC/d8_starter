@@ -3,5 +3,4 @@
 /bootstrap
 /images
 /js
-bower_components
-/patternlab/source/css/
+/node_modules

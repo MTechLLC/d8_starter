@@ -298,7 +298,7 @@ $config_directories = array(
  *   $settings['hash_salt'] = file_get_contents('/home/example/salt.txt');
  * @endcode
  */
-$settings['hash_salt'] = 'GkNz3WqzPRBq9C-NJi7Cp0iZBg4S1dJ2ev28oedMWqWe6OjPqoX3zVkMSa0DR7tnqTXFKxvhcQ';
+$settings['hash_salt'] = '8burcrnNO46a5f_fgDuIKr9HsnBPzEFMRSzdHw_qgYtNCja0djEZZt4B_GaqtXixQtuMZEcwQw';
 
 /**
  * Deployment identifier.
@@ -777,5 +777,4 @@ if (file_exists($app_root . '/' . $site_path . '/settings.platformsh.php')) {
 if (file_exists($app_root . '/' . $site_path . '/settings.local.php')) {
   include $app_root . '/' . $site_path . '/settings.local.php';
 }
-
 $settings['install_profile'] = 'config_installer';

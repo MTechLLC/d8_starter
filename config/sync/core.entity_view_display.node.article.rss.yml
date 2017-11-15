@@ -1,4 +1,4 @@
-uuid: 7145f50f-20c8-40af-ab12-73c94fb6e726
+uuid: 142ec878-08cb-4b46-8861-dbcea30cb6fd
 langcode: en
 status: true
 dependencies:
@@ -10,9 +10,15 @@ dependencies:
     - field.field.node.article.field_tags
     - node.type.article
   module:
+    - field_layout
+    - layout_discovery
     - user
+third_party_settings:
+  field_layout:
+    id: layout_onecol
+    settings: {  }
 _core:
-  default_config_hash: Q90X1FmFdOkTx8udckWPoAgleOstOerbgDnNpoP6PO4
+  default_config_hash: 2rIr6K5Q0UQ9khg0zE_CK-PtJH76UL-BDDZcZnZzwCc
 id: node.article.rss
 targetEntityType: node
 bundle: article

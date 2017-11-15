@@ -1,4 +1,4 @@
-uuid: 44538100-e010-406c-b108-29fde2b2ff73
+uuid: 6c0b5c56-2c64-41e1-92d8-9054e48e1150
 langcode: en
 status: true
 dependencies:
@@ -6,10 +6,16 @@ dependencies:
     - field.field.user.user.user_picture
     - image.style.thumbnail
   module:
+    - field_layout
     - image
+    - layout_discovery
     - user
+third_party_settings:
+  field_layout:
+    id: layout_onecol
+    settings: {  }
 _core:
-  default_config_hash: L2mtwGWH_7wDRCMIR4r_Iu_jmvQ10DV1L8ht8iNZ5qY
+  default_config_hash: V51QPCKkgNREKtSmB9Iu2wmAMEpktVpnzklWaZV8UYo
 id: user.user.default
 targetEntityType: user
 bundle: user
@@ -21,10 +27,10 @@ content:
   user_picture:
     type: image
     weight: 0
+    region: content
     settings:
       image_style: thumbnail
       image_link: content
     third_party_settings: {  }
     label: hidden
-    region: content
 hidden: {  }
