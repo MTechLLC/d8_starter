@@ -97,6 +97,7 @@ php_date.timezone: "America/Chicago"
 php_upload_max_filesize: "50M"
 php_post_max_size: "50M"
 php_output_buffering: "Off"
+drush_version: "8.1.15"
 
 post_provision_scripts:
   - "{{ config_dir }}/scripts/drupalvm/post-provision.sh"
