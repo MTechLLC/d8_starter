@@ -3,7 +3,7 @@ machine:
     timezone:
         America/Los_Angeles
     php:
-        version: 7.1.0
+        version: 7.1
     node:
         version: 4.5.0
     environment:
