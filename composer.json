@@ -104,9 +104,6 @@
     "patches": {
       "drupal/core": {
         "Inline responsive image styles,etc": "https://www.drupal.org/files/issues/2061377-241.patch"
-      },
-      "drupal/migrate_tools": {
-        "Implement running migration processes through the UI": "https://www.drupal.org/files/issues/2470882-40.patch"
       }
     }
   }
